@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Lance Craig</Authors>
+    <Title>Tooling (DevOps)</Title>
+    <Description>Provides DevOps tooling infrastructure.</Description>
+    <Summary>Provides DevOps tooling infrastructure.</Summary>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/lanceccraig/Tooling.DevOps</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lanceccraig/Tooling.DevOps.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Copyright @ Lance Craig</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageIcon>icon.png</PackageIcon>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DebugType>portable</DebugType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bullseye" Version="3.8.0" />
+    <PackageReference Include="LanceC.CommandLine" Version="0.1.0-alpha.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+    <PackageReference Include="SimpleExec" Version="8.0.0" />
+    <PackageReference Include="System.CommandLine.Hosting" Version="0.3.0-alpha.21216.1" />
+    <PackageReference Include="System.IO.Abstractions" Version="13.2.47" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+    <InternalsVisibleTo Include="LanceC.Tooling.DevOps.Facts" />
+    <InternalsVisibleTo Include="LanceC.Tooling.DevOps.IntegrationTests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Messages.Designer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Update="Properties\Messages.Designer.cs">
+      <AutoGen>true</AutoGen>
+      <DependentUpon>Messages.Designer.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>
