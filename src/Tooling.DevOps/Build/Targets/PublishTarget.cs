@@ -22,6 +22,6 @@ internal class PublishTarget : TargetBase
             action: async descriptor => await Executor
                 .Run(
                     "dotnet",
-                    $"publish {descriptor.RelativePath} -p:PublishProfile={descriptor.ProfileName} -c Release -v minimal --no-build --nologo")
+                    $"publish {descriptor.RelativePath} -p:PublishProfile={descriptor.ProfileName} -c Release -v minimal --nologo")
                 .ConfigureAwait(false));
 }

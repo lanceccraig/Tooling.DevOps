@@ -20,6 +20,6 @@ internal class PackTarget : TargetBase
             action: async descriptor => await Executor
                 .Run(
                     "dotnet",
-                    $"pack {descriptor.RelativePath} -o {Options.ArtifactsDirectoryName} -c Release -v minimal --no-build --nologo")
+                    $"pack {descriptor.RelativePath} -o {Options.ArtifactsDirectoryName} -c Release -v minimal --nologo")
                 .ConfigureAwait(false));
 }

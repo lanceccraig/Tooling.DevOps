@@ -2,7 +2,7 @@
 <Project>
 
   <PropertyGroup>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <LangVersion>latest</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
