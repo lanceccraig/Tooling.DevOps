@@ -22,4 +22,4 @@ jobs:
         dotnet-version: 6.x
         
     - name: Build
-      run: dotnet run --project tools\DevOps.Tooling.Tool.Build\LanceC.DevOps.Tooling.Tool.Build.csproj
+      run: dotnet run --project tools\Tooling.DevOps.Tool.Build\LanceC.Tooling.DevOps.Tool.Build.csproj
