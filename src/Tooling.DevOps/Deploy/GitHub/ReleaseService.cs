@@ -87,7 +87,7 @@ internal class ReleaseService : IReleaseService
         }
     }
 
-    private string BuildReleaseBody(IReadOnlyCollection<ReleasableIssue> releasableIssues)
+    private static string BuildReleaseBody(IReadOnlyCollection<ReleasableIssue> releasableIssues)
     {
         Guard.Against.Null(releasableIssues, nameof(releasableIssues));
 
