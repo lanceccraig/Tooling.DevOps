@@ -5,7 +5,7 @@
     <Title>Tooling (DevOps)</Title>
     <Description>Provides DevOps tooling infrastructure.</Description>
     <Summary>Provides DevOps tooling infrastructure.</Summary>
-    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageReleaseNotes>Remove --no-build option for pack and publish build targets.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/lanceccraig/Tooling.DevOps</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lanceccraig/Tooling.DevOps.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
