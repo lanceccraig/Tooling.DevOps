@@ -8,8 +8,8 @@ namespace LanceC.Tooling.DevOps.Build;
 [ExcludeFromCodeCoverage]
 public class TestProjectDescriptor : ProjectDescriptorBase
 {
-    internal TestProjectDescriptor(string relativePath, string testSuite)
-        : base(relativePath)
+    internal TestProjectDescriptor(string relativePath, bool forceBuild, string testSuite)
+        : base(relativePath, forceBuild)
     {
         TestSuite = testSuite;
     }

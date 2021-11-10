@@ -1,5 +1,4 @@
 using LanceC.Tooling.DevOps.Internal;
-using static Bullseye.Targets;
 
 namespace LanceC.Tooling.DevOps.Build.Targets;
 
@@ -14,14 +13,20 @@ internal class PublishTarget : TargetBase
 
     public override bool PreCondition => Options.PublishProjects.Any();
 
+    private IEnumerable<string>? Dependencies => Options.PublishProjects.Any(p => !p.ForceBuild)
+        ? Bullseye.Targets.DependsOn(BuiltInBuildTargets.Build)
+        : default;
+
     public override void Setup(Bullseye.Targets targets)
-        => targets.Add(
-            BuiltInBuildTargets.Publish,
-            DependsOn(BuiltInBuildTargets.Build),
-            forEach: Options.PublishProjects,
-            action: async descriptor => await Executor
-                .Run(
-                    "dotnet",
-                    $"publish {descriptor.RelativePath} -p:PublishProfile={descriptor.ProfileName} -c Release -v minimal --nologo")
-                .ConfigureAwait(false));
+        => targets.Add(BuiltInBuildTargets.Publish, Dependencies, forEach: Options.PublishProjects, action: PublishProject);
+
+    private async Task PublishProject(PublishProjectDescriptor descriptor)
+    {
+        var noBuildOption = !descriptor.ForceBuild ? " --no-build" : string.Empty;
+        await Executor
+            .Run(
+                "dotnet",
+                $"publish {descriptor.RelativePath} -p:PublishProfile={descriptor.ProfileName} -c Release -v minimal --nologo{noBuildOption}")
+            .ConfigureAwait(false);
+    }
 }

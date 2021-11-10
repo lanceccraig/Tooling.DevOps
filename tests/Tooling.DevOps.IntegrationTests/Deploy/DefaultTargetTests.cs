@@ -7,9 +7,9 @@ using Moq;
 using Moq.AutoMock;
 using Xunit;
 
-namespace LanceC.Tooling.DevOps.IntegrationTests;
+namespace LanceC.Tooling.DevOps.IntegrationTests.Deploy;
 
-public class DeployTests
+public class DefaultTargetTests
 {
     private readonly AutoMocker _mocker = new();
     private readonly RepositoryInfo _repositoryInfo = new("Name", "OwnerName");

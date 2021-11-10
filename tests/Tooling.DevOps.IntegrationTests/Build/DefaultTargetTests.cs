@@ -7,9 +7,9 @@ using Moq.AutoMock;
 using Xunit;
 using static LanceC.Tooling.DevOps.IntegrationTests.Testing.CommandLineUtility;
 
-namespace LanceC.Tooling.DevOps.IntegrationTests;
+namespace LanceC.Tooling.DevOps.IntegrationTests.Build;
 
-public class BuildTests
+public class DefaultTargetTests
 {
     private readonly AutoMocker _mocker = new();
 

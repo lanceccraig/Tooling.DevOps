@@ -13,11 +13,14 @@ public static class BuildOptionsExtensions
     /// <param name="options">The build options to modify.</param>
     /// <param name="relativePath">The path of the project relative to the repository root.</param>
     /// <param name="testSuite">The suite of tests contained within the project.</param>
-    public static void AddTestProject(this BuildOptions options, string relativePath, string testSuite)
+    /// <param name="forceBuild">
+    /// The value that determines whether the project must be rebuilt before any additional executions.
+    /// </param>
+    public static void AddTestProject(this BuildOptions options, string relativePath, string testSuite, bool forceBuild = false)
     {
         Guard.Against.Null(options, nameof(options));
 
-        options.TestProjects.Add(new Build.TestProjectDescriptor(relativePath, testSuite));
+        options.TestProjects.Add(new Build.TestProjectDescriptor(relativePath, forceBuild, testSuite));
     }
 
     /// <summary>
@@ -25,11 +28,14 @@ public static class BuildOptionsExtensions
     /// </summary>
     /// <param name="options">The build options to modify.</param>
     /// <param name="relativePath">The path of the project relative to the repository root.</param>
-    public static void AddPackProject(this BuildOptions options, string relativePath)
+    /// <param name="forceBuild">
+    /// The value that determines whether the project must be rebuilt before any additional executions.
+    /// </param>
+    public static void AddPackProject(this BuildOptions options, string relativePath, bool forceBuild = false)
     {
         Guard.Against.Null(options, nameof(options));
 
-        options.PackProjects.Add(new Build.PackProjectDescriptor(relativePath));
+        options.PackProjects.Add(new Build.PackProjectDescriptor(relativePath, forceBuild));
     }
 
     /// <summary>
@@ -38,10 +44,13 @@ public static class BuildOptionsExtensions
     /// <param name="options">The build options to modify.</param>
     /// <param name="relativePath">The path of the project relative to the repository root.</param>
     /// <param name="profileName">The name of the publish profile.</param>
-    public static void AddPublishProject(this BuildOptions options, string relativePath, string profileName)
+    /// <param name="forceBuild">
+    /// The value that determines whether the project must be rebuilt before any additional executions.
+    /// </param>
+    public static void AddPublishProject(this BuildOptions options, string relativePath, string profileName, bool forceBuild = false)
     {
         Guard.Against.Null(options, nameof(options));
 
-        options.PublishProjects.Add(new Build.PublishProjectDescriptor(relativePath, profileName));
+        options.PublishProjects.Add(new Build.PublishProjectDescriptor(relativePath, forceBuild, profileName));
     }
 }

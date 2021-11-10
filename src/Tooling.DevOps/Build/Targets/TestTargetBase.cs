@@ -20,12 +20,18 @@ internal abstract class TestTargetBase : TargetBase
     private IEnumerable<TestProjectDescriptor> TestProjects
         => Options.TestProjects.Where(p => p.TestSuite.Equals(_testSuite, StringComparison.OrdinalIgnoreCase));
 
+    private IEnumerable<string>? Dependencies => TestProjects.Any(p => !p.ForceBuild)
+        ? DependsOn(BuiltInBuildTargets.Build)
+        : default;
+
     public override void Setup(Bullseye.Targets targets)
-        => targets.Add(
-            _targetName,
-            DependsOn(BuiltInBuildTargets.Build),
-            forEach: TestProjects,
-            action: async descriptor => await Executor
-                .Run("dotnet", $"test {descriptor.RelativePath} -c Release -v minimal --no-build --nologo")
-                .ConfigureAwait(false));
+        => targets.Add(_targetName, Dependencies, forEach: TestProjects, action: TestProject);
+
+    private async Task TestProject(TestProjectDescriptor descriptor)
+    {
+        var noBuildOption = !descriptor.ForceBuild ? " --no-build" : string.Empty;
+        await Executor
+            .Run("dotnet", $"test {descriptor.RelativePath} -c Release -v minimal --nologo{noBuildOption}")
+            .ConfigureAwait(false);
+    }
 }
