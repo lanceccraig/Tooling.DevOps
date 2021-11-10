@@ -13,13 +13,20 @@ internal class PackTarget : TargetBase
 
     public override bool PreCondition => Options.PackProjects.Any();
 
+    private IEnumerable<string>? Dependencies => Options.PackProjects.Any(p => !p.ForceBuild)
+        ? Bullseye.Targets.DependsOn(BuiltInBuildTargets.Build)
+        : default;
+
     public override void Setup(Bullseye.Targets targets)
-        => targets.Add(
-            BuiltInBuildTargets.Pack,
-            forEach: Options.PackProjects,
-            action: async descriptor => await Executor
-                .Run(
-                    "dotnet",
-                    $"pack {descriptor.RelativePath} -o {Options.ArtifactsDirectoryName} -c Release -v minimal --nologo")
-                .ConfigureAwait(false));
+        => targets.Add(BuiltInBuildTargets.Pack, Dependencies, forEach: Options.PackProjects, action: PackProject);
+
+    private async Task PackProject(PackProjectDescriptor descriptor)
+    {
+        var noBuildOption = !descriptor.ForceBuild ? " --no-build" : string.Empty;
+        await Executor
+            .Run(
+                "dotnet",
+                $"pack {descriptor.RelativePath} -o {Options.ArtifactsDirectoryName} -c Release -v minimal --nologo{noBuildOption}")
+            .ConfigureAwait(false);
+    }
 }

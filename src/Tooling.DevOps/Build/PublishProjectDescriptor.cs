@@ -8,8 +8,8 @@ namespace LanceC.Tooling.DevOps.Build;
 [ExcludeFromCodeCoverage]
 public class PublishProjectDescriptor : ProjectDescriptorBase
 {
-    internal PublishProjectDescriptor(string relativePath, string profileName)
-        : base(relativePath)
+    internal PublishProjectDescriptor(string relativePath, bool forceBuild, string profileName)
+        : base(relativePath, forceBuild)
     {
         ProfileName = profileName;
     }

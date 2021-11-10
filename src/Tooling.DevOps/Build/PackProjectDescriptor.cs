@@ -8,8 +8,8 @@ namespace LanceC.Tooling.DevOps.Build;
 [ExcludeFromCodeCoverage]
 public class PackProjectDescriptor : ProjectDescriptorBase
 {
-    internal PackProjectDescriptor(string relativePath)
-        : base(relativePath)
+    internal PackProjectDescriptor(string relativePath, bool forceBuild)
+        : base(relativePath, forceBuild)
     {
     }
 }
